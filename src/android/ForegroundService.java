@@ -34,6 +34,9 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.PowerManager;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import org.json.JSONObject;
 
 import static android.os.PowerManager.PARTIAL_WAKE_LOCK;
@@ -166,6 +169,7 @@ public class ForegroundService extends Service {
                 .setContentTitle(title)
                 .setContentText(text)
                 .setOngoing(true)
+				.setLargeIcon(getBigIconResId())
                 .setSmallIcon(getIconResId(settings));
 
         if (settings.optBoolean("hidden", true)) {
@@ -227,6 +231,30 @@ public class ForegroundService extends Service {
         return resId;
     }
 
+    /**
+     * Retrieves the resource ID of the app icon.
+     *
+     * @param settings A JSON dict containing the icon name.
+     */
+    private Bitmap getBigIconResId() {
+		
+		Context context = getApplicationContext();
+		Resources res = context.getResources();
+		
+
+ // cordova-android 6 uses mipmaps
+        int resId = getIconResId("icon", "mipmap");
+
+        if (resId == 0) {
+            resId = getIconResId("icon", "drawable");
+        }
+        //String icon = settings.optString("icon", NOTIFICATION_ICON);
+
+
+
+        return BitmapFactory.decodeResource(res, resId);
+    }	
+	
     /**
      * Retrieve resource id of the specified icon.
      *
