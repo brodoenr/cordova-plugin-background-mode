@@ -169,7 +169,7 @@ public class ForegroundService extends Service {
                 .setContentTitle(title)
                 .setContentText(text)
                 .setOngoing(true)
-				.setLargeIcon(getBigIconResId())
+		.setLargeIcon(getBigIconResId())
                 .setSmallIcon(getIconResId(settings));
 
         if (settings.optBoolean("hidden", true)) {
@@ -238,8 +238,8 @@ public class ForegroundService extends Service {
      */
     private Bitmap getBigIconResId() {
 		
-		Context context = getApplicationContext();
-		Resources res = context.getResources();
+	Context context = getApplicationContext();
+	Resources res = context.getResources();
 		
 
  // cordova-android 6 uses mipmaps
@@ -249,8 +249,6 @@ public class ForegroundService extends Service {
             resId = getIconResId("icon", "drawable");
         }
         //String icon = settings.optString("icon", NOTIFICATION_ICON);
-
-
 
         return BitmapFactory.decodeResource(res, resId);
     }	
